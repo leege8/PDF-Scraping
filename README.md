@@ -38,11 +38,14 @@ To ensure the inventory has sufficient stock through the daily operation, the sy
 ```
 Select * from Inventory where InventoryID = ‘IV-0001’;
 ```
+
 <img src="https://github.com/leege8/Advanced-Relational-Database-Management/assets/124459825/c419376f-3445-4d8b-9f98-89ec1eec94ff" alt="Diagramt" width="200"/>
+
 ```
 Update Inventory 
 Set InventoryQuantity = 50 where InventoryID = ‘IV-0001’;
 ```
+
 <img src="https://github.com/leege8/Advanced-Relational-Database-Management/assets/124459825/e2cbb9f9-1a70-422f-a916-1cf6e998d68a" alt="Diagramt" width="200"/>
 
 #### Employee Evaluation
