@@ -13,7 +13,7 @@ In addition, the management of company ABC believe it is very important to maint
 <img src="https://github.com/leege8/Advanced-Relational-Database-Management/assets/124459825/9440752b-2a0e-43fa-903c-c74f689b1624" alt="Diagramt" width="500"/>
 
 ## Database Design:
-### 1. Develop an ERD
+### Part I. Develop an ERD
 The following busienss rules are incorproated while developing the entity relationship diagram:
 1. Contract
 - Each customer has at least one contract. However, they may only have up to one active contract at a time
@@ -31,7 +31,7 @@ The following busienss rules are incorproated while developing the entity relati
 Below is the ERD:
 ![image](https://github.com/leege8/Advanced-Relational-Database-Management/assets/124459825/9399abaf-967f-4838-923a-54e9078c5654)
 
-### 2. Develop Sequences, Triggers, functions, procedures and indexes to support daily operation. 
+### Part II. Develop Sequences, Triggers, functions, procedures and indexes to support daily operation. 
 For details, please refer to attached code zip package.
 #### Inventory stock
 To ensure the inventory has sufficient stock through the daily operation, the system will automatically prompt a message as reminder for supplements when the inventory is low. Additionally, when the inventory quantities are updated as a result of new orders being placed or restocking, a summary information of each inventory item and its corresponding quantity will be automatically generated
