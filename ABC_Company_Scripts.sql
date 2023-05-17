@@ -1,5 +1,4 @@
 REM Advanced Relational Database Management
-REM Group2
 REM This file is used to create, and add data to entity objects.
 
 
