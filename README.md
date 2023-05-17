@@ -32,7 +32,32 @@ Below is the ERD:
 ![image](https://github.com/leege8/Advanced-Relational-Database-Management/assets/124459825/9399abaf-967f-4838-923a-54e9078c5654)
 
 ### 2. Develop Sequences, Triggers, functions, procedures and indexes to support daily operation. 
+For details, please refer to attached code zip package.
 #### Inventory stock
 To ensure the inventory has sufficient stock through the daily operation, the system will automatically prompt a message as reminder for supplements when the inventory is low. Additionally, when the inventory quantities are updated as a result of new orders being placed or restocking, a summary information of each inventory item and its corresponding quantity will be automatically generated
+```
+Select * from Inventory where InventoryID = ‘IV-0001’;
+```
+<img src="https://github.com/leege8/Advanced-Relational-Database-Management/assets/124459825/c419376f-3445-4d8b-9f98-89ec1eec94ff" alt="Diagramt" width="200"/>
+```
+Update Inventory 
+Set InventoryQuantity = 50 where InventoryID = ‘IV-0001’;
+```
+<img src="https://github.com/leege8/Advanced-Relational-Database-Management/assets/124459825/e2cbb9f9-1a70-422f-a916-1cf6e998d68a" alt="Diagramt" width="200"/>
 
+#### Employee Evaluation
+The function computes the evaluation score to facilitate the employee evaluation process. The delivery manager uses this information to allocate the bonus amount to the employee. 
+```
+Execute employee_rating_calc;
+Select employee_rating_calc (‘E019’, 8) as rating from Dual;
+```
+<img src="https://github.com/leege8/Advanced-Relational-Database-Management/assets/124459825/dfbaeb57-d1bd-40c1-b6c2-13be7b4fe4ad" alt="Diagramt" width="200"/>
 
+#### Billing Consolidation
+The procedure computes outstanding amounts by each customer per month. 
+```
+Execute MV_Company_Billing;
+Execute get_company_billing;
+Execute company_billing_job;
+```
+<img src="https://github.com/leege8/Advanced-Relational-Database-Management/assets/124459825/ed0c478b-a073-4575-8563-4f35aa598241" alt="Diagramt" width="200"/>
