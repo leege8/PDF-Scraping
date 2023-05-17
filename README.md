@@ -39,7 +39,7 @@ To ensure the inventory has sufficient stock through the daily operation, the sy
 Select * from Inventory where InventoryID = ‘IV-0001’;
 ```
 
-<img src="https://github.com/leege8/Advanced-Relational-Database-Management/assets/124459825/c419376f-3445-4d8b-9f98-89ec1eec94ff" alt="Diagramt" width="300"/>
+<img src="https://github.com/leege8/Advanced-Relational-Database-Management/assets/124459825/c419376f-3445-4d8b-9f98-89ec1eec94ff" alt="Diagramt" width="400"/>
 
 ```
 Update Inventory 
@@ -54,7 +54,7 @@ The function computes the evaluation score to facilitate the employee evaluation
 Execute employee_rating_calc;
 Select employee_rating_calc (‘E019’, 8) as rating from Dual;
 ```
-<img src="https://github.com/leege8/Advanced-Relational-Database-Management/assets/124459825/dfbaeb57-d1bd-40c1-b6c2-13be7b4fe4ad" alt="Diagramt" width="400"/>
+<img src="https://github.com/leege8/Advanced-Relational-Database-Management/assets/124459825/dfbaeb57-d1bd-40c1-b6c2-13be7b4fe4ad" alt="Diagramt" width="500"/>
 
 #### Billing Consolidation
 The procedure computes outstanding amounts by each customer per month. 
