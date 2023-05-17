@@ -9,7 +9,7 @@ This project is aimed to create an internal database management system for compa
 Below is a high-level workflow:   
 <img src="https://github.com/leege8/Advanced-Relational-Database-Management/assets/124459825/ea2c184e-9cb2-4860-af79-688385516945" alt="Diagramt" width="500"/>
 
-In addition, the management of company ABC believe it is very important to maintain segregation of duties between sales, finance, and operations departments. And Performance evaluation is conducted on drivers regularly to ensure customer satisfaction.
+In addition, the management of company ABC believe it is very important to maintain segregation of duties between sales, finance, and operations departments. And Performance evaluation is conducted on drivers regularly to ensure customer satisfaction.   
 <img src="https://github.com/leege8/Advanced-Relational-Database-Management/assets/124459825/9440752b-2a0e-43fa-903c-c74f689b1624" alt="Diagramt" width="500"/>
 
 ## Database Design:
