@@ -54,7 +54,7 @@ The function computes the evaluation score to facilitate the employee evaluation
 Execute employee_rating_calc;
 Select employee_rating_calc (‘E019’, 8) as rating from Dual;
 ```
-<img src="https://github.com/leege8/Advanced-Relational-Database-Management/assets/124459825/dfbaeb57-d1bd-40c1-b6c2-13be7b4fe4ad" alt="Diagramt" width="300"/>
+<img src="https://github.com/leege8/Advanced-Relational-Database-Management/assets/124459825/dfbaeb57-d1bd-40c1-b6c2-13be7b4fe4ad" alt="Diagramt" width="400"/>
 
 #### Billing Consolidation
 The procedure computes outstanding amounts by each customer per month. 
