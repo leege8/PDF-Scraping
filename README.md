@@ -32,7 +32,7 @@ Below is the ERD:
 ![image](https://github.com/leege8/Advanced-Relational-Database-Management/assets/124459825/9399abaf-967f-4838-923a-54e9078c5654)
 
 ### Part II. Develop Sequences, Triggers, functions, procedures and indexes to support daily operation. 
-For details, please refer to attached code zip package.
+For details, please refer to attached SQL scripts.
 #### Inventory stock
 To ensure the inventory has sufficient stock through the daily operation, the system will automatically prompt a message as reminder for supplements when the inventory is low. Additionally, when the inventory quantities are updated as a result of new orders being placed or restocking, a summary information of each inventory item and its corresponding quantity will be automatically generated
 ```
