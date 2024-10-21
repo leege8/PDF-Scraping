@@ -13,39 +13,80 @@ from tabula.io import read_pdf
 ```
 
 ## Methodologies
-Imagine there are 3 different tables in the same PDF file and the task is to extract the yellow highlighted product table:
+Imagine there are three different tables within the same PDF file, and the task is to extract the product table highlighted in yellow. Note that some tables contain merged cells, while others do not, and they are not always aligned strictly vertically or horizontally.
+### Step 1
+Assume this PDF document spans multiple pages. The first step is to identify which page contains the product table we are seeking. 
+```
+P = 'Product'
+reader = pdfs.PdfReader(file_path)
 
+for ipage, page in enumerate(reader.pages, start=1):
+    text = page.extract_text()
+    if re.search(P, text):
+        print('Found Product Table on page', ipage)
+```
+### Step 2
+Once the page number is identified, read the specific page. Set the parameter guess=False to ensure the entire page is captured, and use output_format='json' to convert the table into JSON format. 
+```
+P = 'Product'
+reader = pdfs.PdfReader(file_path)
 
-### Part II. Develop Sequences, Triggers, functions, procedures and indexes to support daily operation. 
-For details, please refer to attached SQL scripts.
-#### 1. Inventory stock
-To ensure the inventory has sufficient stock through the daily operation, the system will automatically prompt a message as reminder for supplements when the inventory is low. Additionally, when the inventory quantities are updated as a result of new orders being placed or restocking, a summary information of each inventory item and its corresponding quantity will be automatically generated
-```
-Select * from Inventory where InventoryID = ‘IV-0001’;
-```
+for ipage, page in enumerate(reader.pages, start=1):
+    text = page.extract_text()
+    if re.search(P, text):
+        print('Found Product Table on page', ipage)
 
-<img src="https://github.com/leege8/Advanced-Relational-Database-Management/assets/124459825/c419376f-3445-4d8b-9f98-89ec1eec94ff" alt="Diagramt" width="400"/>
+        table = tabula.io.read_pdf(file_path,guess=False, stream=True, pages=ipage,columns=(),multiple_tables=True, output_format="json",pandas_options={'header': None})
+```
+you can view what the data look like in Json structure by using a nested for loop. Each string has 4 keys: top, left, width and height. 
+In the case, bottom = top + height; right = left + width
+```
+for i in table[0].get('data'):
+    for j in i:
+        print(j)
+#outputs: 
+#{'top': 87.69, 'left': 104.4, 'width': 28.69988250732422, 'height': 6.75, 'text': 'Name'}
+#{'top': 87.69, 'left': 185.76, 'width': 18.799880981445312, 'height': 6.75, 'text': 'Age'}
+#{'top': 87.69, 'left': 257.52, 'width': 53.92987060546875, 'height': 6.75, 'text': 'Occupation'}
+#{'top': 87.69, 'left': 342.12, 'width': 37.95989990234375, 'height': 6.75, 'text': 'Country'}
+#{'top': 87.69, 'left': 400.92, 'width': 33.369842529296875, 'height': 6.75, 'text': 'Capital'}
+#{'top': 87.69, 'left': 461.4, 'width': 98.19985961914062, 'height': 6.75, 'text': 'Population (Millions)'}
+#{'top': 87.69, 'left': 577.44, 'width': 43.640018463134766, 'height': 6.75, 'text': 'Language'}
+#...
+```
+### Step 3
+Within the if statement, check for the 'Top', 'Right', 'Left', and 'Bottom' coordinates by specifying the keywords. Incorporate these four coordinates into the area parameter and scrape the table again. The output will display a final table in a well-structured format.
+```
+P = 'Product'
+reader = pdfs.PdfReader(file_path)
 
-```
-Update Inventory 
-Set InventoryQuantity = 50 where InventoryID = ‘IV-0001’;
-```
+for ipage, page in enumerate(reader.pages, start=1):
+    text = page.extract_text()
+    if re.search(P, text):
+        print('Found Product Table on page', ipage)
 
-<img src="https://github.com/leege8/Advanced-Relational-Database-Management/assets/124459825/e2cbb9f9-1a70-422f-a916-1cf6e998d68a" alt="Diagramt" width="300"/>
+        table = tabula.io.read_pdf(file_path,guess=False, stream=True, pages=ipage,columns=(),multiple_tables=True, 
+                                               output_format="json",pandas_options={'header': None})
+        top_Dict = {}
+        bottom_Dict = {}
+        right_Dict = {}
+        
+        for dic in table[0].get('data'):
+            for lst in dic:
+                if lst['top'] !=0.0:
+                    bottom_Dict.update({lst['top']+lst['height']*3:lst['text']})
+                    
+                if lst['text'] in '4.5' and lst['top'] !=0.0: 
+                    right_Dict.update({lst['left']+lst['width']*2:lst['text']})
 
-#### 2. Employee Evaluation
-The function computes the evaluation score to facilitate the employee evaluation process. The delivery manager uses this information to allocate the bonus amount to the employee. 
-```
-Execute employee_rating_calc;
-Select employee_rating_calc (‘E019’, 8) as rating from Dual;
-```
-<img src="https://github.com/leege8/Advanced-Relational-Database-Management/assets/124459825/dfbaeb57-d1bd-40c1-b6c2-13be7b4fe4ad" alt="Diagramt" width="500"/>
+                if lst['text'] in 'Laptop' and lst['top'] !=0.0:
+                    top_Dict.update({lst['top']:lst['text']})
+                            
+        table_updated = tabula.io.read_pdf(file_path,guess=True, stream=True, pages=ipage,columns=(), 
+                                                area=(max(list(top_Dict.keys())),10, max(list(bottom_Dict.keys())), max(list(right_Dict.keys()))),
+                                                     pandas_options={'header': None})
+        
+        table_final = table_updated[0].fillna('')
+        display(table_final)
+```        
 
-#### 3. Billing Consolidation
-The procedure computes outstanding amounts by each customer per month. 
-```
-Execute MV_Company_Billing;
-Execute get_company_billing;
-Execute company_billing_job;
-```
-<img src="https://github.com/leege8/Advanced-Relational-Database-Management/assets/124459825/ed0c478b-a073-4575-8563-4f35aa598241" alt="Diagramt" width="200"/>
