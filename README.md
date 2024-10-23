@@ -55,7 +55,7 @@ for i in table[0].get('data'):
 #...
 ```
 ### Step 3
-Within the if statement, check for the 'Top', 'Right', 'Left', and 'Bottom' coordinates by specifying the keywords. Incorporate these four coordinates into the area parameter and scrape the table again. The output will display a final table in a well-structured format.
+Within the if statement, check for the 'Top', 'Right', 'Left', and 'Bottom' coordinates by specifying the keywords. Incorporate these four coordinates into the area parameter and scrape the table again. The output will display a final table in a well-structured format. The table will not be affected by merged cells or any adjacent tables. 
 ```
 P = 'Product'
 reader = pdfs.PdfReader(file_path)
@@ -70,7 +70,7 @@ for ipage, page in enumerate(reader.pages, start=1):
         top_Dict = {}
         bottom_Dict = {}
         right_Dict = {}
-        
+        #get the location coordinates: top, bottom and right
         for dic in table[0].get('data'):
             for lst in dic:
                 if lst['top'] !=0.0:
@@ -89,4 +89,7 @@ for ipage, page in enumerate(reader.pages, start=1):
         table_final = table_updated[0].fillna('')
         display(table_final)
 ```        
+### Step 4
+In Step 3, extract only the data itself. You can manually add the headers or use the same approach to extract the table headers and append them to the DataFrame
 
+This concludes the methodologies for accurately scraping tables from PDF documents.
